@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colonias - CONFIDENCIAS DO MUNDO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brasao" style="animation:none;opacity:1;margin-bottom:0.5rem">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px">
+        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="50" r="35" stroke="white" stroke-width="0.5" fill="none"/>
+        <path d="M50 15 L60 40 L50 35 L40 40 Z" fill="white" opacity="0.8"/>
+        <path d="M50 85 L60 60 L50 65 L40 60 Z" fill="white" opacity="0.8"/>
+        <line x1="15" y1="50" x2="40" y2="45" stroke="white" stroke-width="0.5"/>
+        <line x1="15" y1="50" x2="40" y2="55" stroke="white" stroke-width="0.5"/>
+        <line x1="85" y1="50" x2="60" y2="45" stroke="white" stroke-width="0.5"/>
+        <line x1="85" y1="50" x2="60" y2="55" stroke="white" stroke-width="0.5"/>
+        <circle cx="50" cy="50" r="8" stroke="white" stroke-width="1" fill="none"/>
+        <circle cx="50" cy="50" r="3" fill="white"/>
+      </svg>
+      <h1 style="font-size:1rem;margin-top:0.4rem">Confidencias do Mundo</h1>
+      <div class="sub">Colonias</div>
+    </div>
+  </header>
+
+  <main class="feiticeiros-grid">
+    <div class="feiticeiro-card colonia-card" style="animation-delay:0.1s">
+      <div class="nome">Os Calouros</div>
+      <div class="info-row">
+        <span class="label">Mantimentos</span>
+        <span class="value">Uma caixa de enlatado</span>
+      </div>
+      <button class="btn-roubar" onclick="roubar(this)">Roubar mantimentos</button>
+    </div>
+
+    <div class="feiticeiro-card colonia-card" style="animation-delay:0.2s">
+      <div class="nome">O Santuario</div>
+      <div class="info-row">
+        <span class="label">Mantimentos</span>
+        <span class="value">Algumas caixas de enlatados</span>
+      </div>
+      <button class="btn-roubar" onclick="roubar(this)">Roubar mantimentos</button>
+    </div>
+
+    <div class="feiticeiro-card colonia-card morta" style="animation-delay:0.3s">
+      <div class="nome">Os Celestias</div>
+      <div class="info-row">
+        <span class="label">Estado</span>
+        <span class="value morto">Mortos</span>
+      </div>
+    </div>
+
+    <div class="feiticeiro-card colonia-card misterio" style="animation-delay:0.4s">
+      <div class="nome">Misterios</div>
+      <div class="info-row">
+        <span class="label">Mantimentos</span>
+        <span class="value desconhecido">???</span>
+      </div>
+    </div>
+  </main>
+
+  <div class="popup-overlay" id="popupRoubo">
+    <div class="popup-box">
+      <p>Foi enviada uma equipe para o roubo.</p>
+      <button class="btn-fechar" onclick="fecharPopup()">Ok</button>
+    </div>
+  </div>
+
+  <a href="dashboard.html" class="voltar">Voltar</a>
+  <script src="audio.js"></script>
+  <script>
+    function roubar(btn) {
+      btn.disabled = true;
+      btn.textContent = 'Roubado';
+      document.getElementById('popupRoubo').classList.add('visible');
+    }
+
+    function fecharPopup() {
+      document.getElementById('popupRoubo').classList.remove('visible');
+    }
+  </script>
+</body>
+</html>

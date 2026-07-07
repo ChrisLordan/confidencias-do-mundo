@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CONFIDENCIAS DO MUNDO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="brasao">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="50" r="35" stroke="white" stroke-width="0.5" fill="none"/>
+        <path d="M50 15 L60 40 L50 35 L40 40 Z" fill="white" opacity="0.8"/>
+        <path d="M50 85 L60 60 L50 65 L40 60 Z" fill="white" opacity="0.8"/>
+        <line x1="15" y1="50" x2="40" y2="45" stroke="white" stroke-width="0.5"/>
+        <line x1="15" y1="50" x2="40" y2="55" stroke="white" stroke-width="0.5"/>
+        <line x1="85" y1="50" x2="60" y2="45" stroke="white" stroke-width="0.5"/>
+        <line x1="85" y1="50" x2="60" y2="55" stroke="white" stroke-width="0.5"/>
+        <circle cx="50" cy="50" r="8" stroke="white" stroke-width="1" fill="none"/>
+        <circle cx="50" cy="50" r="3" fill="white"/>
+      </svg>
+      <h1>Confidencias do Mundo</h1>
+      <div class="sub">Acesso Restrito</div>
+    </div>
+
+    <div class="card">
+      <h2>Autenticacao</h2>
+      <form id="loginForm" autocomplete="off">
+        <div class="form-group">
+          <label for="usuario">Usuario</label>
+          <input type="text" id="usuario" placeholder="Digite seu usuario" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label for="senha">Senha</label>
+          <input type="password" id="senha" placeholder="Digite sua senha" autocomplete="off">
+        </div>
+        <div class="btn-wrapper">
+          <button type="submit" class="btn">Entrar</button>
+        </div>
+      </form>
+      <div id="erro" class="erro"></div>
+    </div>
+  </div>
+
+  <div id="terminalOverlay" class="terminal-overlay">
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="terminal-title">CMD.exe - Terminal Interativo</span>
+        <span class="terminal-close" id="terminalClose">x</span>
+      </div>
+      <div class="terminal-body">
+        <div class="terminal-output" id="terminalOutput"></div>
+        <div class="terminal-input-line">
+          <span class="prompt">></span>
+          <input type="text" id="terminalInput" class="terminal-input" placeholder="digite sua resposta..." disabled autocomplete="off">
+          <button id="terminalSend" class="terminal-send">></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="audio.js"></script>
+</body>
+</html>

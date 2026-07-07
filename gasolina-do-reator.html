@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gasolina Do Reator - CONFIDENCIAS DO MUNDO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brasao" style="animation:none;opacity:1;margin-bottom:0.5rem">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:48px;height:48px">
+        <circle cx="50" cy="50" r="45" stroke="white" stroke-width="2" fill="none"/>
+        <circle cx="50" cy="50" r="35" stroke="white" stroke-width="0.5" fill="none"/>
+        <path d="M50 15 L60 40 L50 35 L40 40 Z" fill="white" opacity="0.8"/>
+        <path d="M50 85 L60 60 L50 65 L40 60 Z" fill="white" opacity="0.8"/>
+        <line x1="15" y1="50" x2="40" y2="45" stroke="white" stroke-width="0.5"/>
+        <line x1="15" y1="50" x2="40" y2="55" stroke="white" stroke-width="0.5"/>
+        <line x1="85" y1="50" x2="60" y2="45" stroke="white" stroke-width="0.5"/>
+        <line x1="85" y1="50" x2="60" y2="55" stroke="white" stroke-width="0.5"/>
+        <circle cx="50" cy="50" r="8" stroke="white" stroke-width="1" fill="none"/>
+        <circle cx="50" cy="50" r="3" fill="white"/>
+      </svg>
+      <h1 style="font-size:1rem;margin-top:0.4rem">Confidencias do Mundo</h1>
+      <div class="sub">Gasolina Do Reator</div>
+    </div>
+  </header>
+
+  <main class="fuel-section">
+    <div class="fuel-card">
+      <h3>Nivel de Combustivel</h3>
+      <div class="fuel-percent alta" id="fuelPercent">100%</div>
+      <div class="fuel-bar-bg">
+        <div class="fuel-bar-fill" id="fuelBarFill" style="width:100%"></div>
+      </div>
+      <div class="fuel-status" id="fuelStatus">OPERANDO NORMALMENTE</div>
+      <button class="btn-reabastecer" id="btnReabastecer">Reabastecer</button>
+      <div class="fuel-info">O combustivel diminui 2% a cada 2 minutos</div>
+    </div>
+  </main>
+
+  <a href="dashboard.html" class="voltar">Voltar</a>
+  <script src="audio.js"></script>
+  <script>
+    (function () {
+      var DECREASE = 2;
+      var INTERVAL = 120000;
+      var STORAGE_KEY = 'fuel_nivel';
+      var STORAGE_TIME = 'fuel_timestamp';
+
+      var fuelPercent = document.getElementById('fuelPercent');
+      var fuelBarFill = document.getElementById('fuelBarFill');
+      var fuelStatus = document.getElementById('fuelStatus');
+      var btnReabastecer = document.getElementById('btnReabastecer');
+
+      function calcularNivel() {
+        var saved = localStorage.getItem(STORAGE_KEY);
+        var savedTime = localStorage.getItem(STORAGE_TIME);
+
+        if (saved !== null && savedTime !== null) {
+          var elapsed = Date.now() - parseInt(savedTime, 10);
+          var lost = Math.floor(elapsed / INTERVAL) * DECREASE;
+          var nivel = parseFloat(saved) - lost;
+          if (nivel < 0) nivel = 0;
+          return nivel;
+        }
+        return 100;
+      }
+
+      var fuel = calcularNivel();
+
+      function salvarNivel() {
+        localStorage.setItem(STORAGE_KEY, fuel);
+        localStorage.setItem(STORAGE_TIME, Date.now());
+      }
+
+      function atualizarBarra() {
+        fuelPercent.textContent = Math.round(fuel) + '%';
+        fuelBarFill.style.width = Math.round(fuel) + '%';
+
+        fuelPercent.className = 'fuel-percent';
+        fuelBarFill.className = 'fuel-bar-fill';
+
+        if (fuel > 50) {
+          fuelPercent.classList.add('alta');
+          fuelStatus.textContent = 'OPERANDO NORMALMENTE';
+        } else if (fuel > 20) {
+          fuelPercent.classList.add('media');
+          fuelBarFill.classList.add('media');
+          fuelStatus.textContent = 'NIVEL MEDIO — ATENCAO';
+        } else if (fuel > 5) {
+          fuelPercent.classList.add('baixa');
+          fuelBarFill.classList.add('baixa');
+          fuelStatus.textContent = 'NIVEL BAIXO — REABASTECA EM BREVE';
+        } else {
+          fuelPercent.classList.add('baixa');
+          fuelBarFill.classList.add('critica');
+          fuelStatus.textContent = 'NIVEL CRITICO — REABASTECA AGORA';
+        }
+
+        salvarNivel();
+      }
+
+      function reabastecer() {
+        fuel = 100;
+        atualizarBarra();
+      }
+
+      btnReabastecer.addEventListener('click', reabastecer);
+
+      atualizarBarra();
+
+      setInterval(function () {
+        if (fuel > 0) {
+          fuel = Math.max(0, fuel - DECREASE);
+          atualizarBarra();
+        }
+      }, INTERVAL);
+    })();
+  </script>
+</body>
+</html>
