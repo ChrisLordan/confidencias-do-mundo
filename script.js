@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const questions = [
     { q: 'Quem criou o mundo?', ans: ['Deus', 'deus'] },
     { q: 'Qual nome da colonia atual?', ans: ['Ordem das barreiras', 'As Barreiras', 'Barreiras'] },
-    { q: '1+1 = ?', ans: ['Fish', 'fish', '11', '2'] }
+    { q: '1+1 = ?', ans: ['Fish', 'fish', '11'] }
   ];
 
   form.addEventListener('submit', function (e) {
