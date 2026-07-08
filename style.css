@@ -415,6 +415,7 @@ header .sub {
 }
 
 .feiticeiro-card:hover {
+  opacity: 1;
   border-color: #666;
   box-shadow: 0 0 16px rgba(255,255,255,0.04);
   animation: cardGlitch 0.4s ease;
